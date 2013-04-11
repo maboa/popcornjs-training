@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
+ 
+    <script>
+      // ensure the web page (DOM) has loaded
+      document.addEventListener("DOMContentLoaded", function () {
+ 
+         // Create a popcorn instance by calling the Vimeo player plugin
+         var example = Popcorn.vimeo(
+         '#video',
+         'http://player.vimeo.com/video/46229233');
+ 
+         example.footnote({
+           start: 4,
+           end: 6,
+           text: "He tumbles!",
+           target: "footnotediv"
+         }).footnote({
+           start: 6,
+           end: 7,
+           text: "He lives!",
+           target: "footnotediv"
+         });
+ 
+         // play the video right away
+         example.play();
+ 
+      }, false);
+    </script>
+  </head>
+  <body>
+    <div id="video" style="width: 360px; height: 300px;" ></div>
+    <div id="footnotediv"></div>
+  </body>
+</html>
