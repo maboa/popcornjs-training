@@ -1,0 +1,14 @@
+ body {
+ 	font-family:"Asap",sans-serif;
+ 	line-height: 1.5em;
+ 	color:#444
+ }
+
+ .columns {
+    -moz-column-count: 4;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 4;
+    -webkit-column-gap: 20px;
+    column-count: 4;
+    column-gap: 20px;
+}
