@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+  <script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
+  <script>
+
+    (function( Popcorn ) {
+      // Demo plugin    
+      Popcorn.plugin( "framey", {
+      
+        start: function(event,track) {
+          document.getElementById("footnotediv").innerHTML = "START <br/>";
+        }, 
+        end: function() {
+          this.media.pause();
+        },
+        frame: function() {
+          document.getElementById("footnotediv").innerHTML += new Date().getMilliseconds() + "</br>";
+        } 
+      });
+    })( Popcorn );
+
+    // ensure the web page (DOM) has loaded
+    document.addEventListener("DOMContentLoaded", function () {
+
+    var pop = Popcorn("#ourvideo", {
+      // Set the "frameAnimation" property to true
+      // This will opt you into playback managed 
+      // by a requestAnimationFrame loop
+      frameAnimation: true,
+      framerate: 20
+    });
+
+    pop.framey({
+      start: 1,
+      end: 3
+      }).play();
+    });
+  </script>
+  </head>
+  <body>
+    <video id="ourvideo" controls >
+      <source src="http://jPlayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v" type="video/mp4">
+      <source src="http://jPlayer.org/video/webm/Big_Buck_Bunny_Trailer.webm" type="video/ogg">
+    </video>
+    <div id="footnotediv"></div>
+  </body>
+</html> 
