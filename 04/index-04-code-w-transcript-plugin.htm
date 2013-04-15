@@ -16,8 +16,8 @@
 
       var pop = Popcorn.youtube( "#ourvideo", "http://www.youtube.com/watch?v=o3LUid0IZ2w" );
       
-      // make this more specific in general
-      var spans = document.getElementsByTagName("span");
+      var transcript = document.getElementById("transcript");
+      var spans = transcript.getElementsByTagName("span");
       console.dir(spans);
 
       for (var i=1, max=spans.length; i < max; i++) {
