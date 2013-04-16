@@ -16,3 +16,9 @@
 	column-count: 4;
 	column-gap: 20px;
 }
+
+.next {
+	float:right;
+	background-color: #eee;
+	padding:8px;
+}
