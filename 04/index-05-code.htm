@@ -2,42 +2,58 @@
 <html>
   <head>
   <style>
-  	.transcript-grey {
-  		color: #999;
-  	}
+    .transcript-unread {
+      color: #999;
+    }
 
-  	
+    .transcript-read {
+      color: #333;
+    }
+
+    #transcript span {
+      cursor: pointer;
+    }
+
+
   </style>
   <script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
-  <script src="https://raw.github.com/maboa/hyperaudiopad/master/js/popcorn.transcript.js"></script>
   <script>
     // ensure the web page (DOM) has loaded
     document.addEventListener("DOMContentLoaded", function () {
 
       var pop = Popcorn.youtube( "#ourvideo", "http://www.youtube.com/watch?v=o3LUid0IZ2w" );
-      
-      var transcript = document.getElementById("transcript");
-      var spans = transcript.getElementsByTagName("span");
-      console.dir(spans);
 
-      for (var i=1, max=spans.length; i < max; i++) {
-      	console.log(spans[i].getAttribute('m')/1000);
-      	pop.transcript({
-      		time: spans[i].getAttribute('m')/1000,
-      		futureClass: "transcript-grey",
-      		target: this
-      	});
-      	
+      var transcript = document.getElementById('transcript');
+      var spans = transcript.getElementsByTagName('span');
+
+      pop.on( "timeupdate", function() {
+
+        for (var i=0, max=spans.length; i < max; i++) {
+          if (spans[i].getAttribute('m') < (this.currentTime() * 1000)) {
+            spans[i].className = "transcript-read";
+          }
+        }
+      });
+
+      for (var i=0, maxI=spans.length; i < maxI; i++) {
+        spans[i].onclick = function(e) {
+          for (var j=0, maxJ=spans.length; j < maxJ; j++) {
+            spans[j].className = "transcript-unread";
+          }
+          pop.play( this.getAttribute('m') / 1000 );
+          return false;
+        }
       }
-
     });
 
   </script>
   </head>
   <body>
     <div id="ourvideo" style="width:600px;height:400px;"></div>
-    <div id="transcript" class="transcript-grey">
-    	<span m="1628" oval="Last">Last</span> 
+
+    <div id="transcript" class="transcript-unread">
+      <p>
+      <span m="1628" oval="Last">Last</span> 
 <span m="1893" oval="night">night</span> 
 <span m="2157" oval="on">on</span> 
 <span m="2422" oval="the">the</span> 
@@ -380,6 +396,8 @@
 <span m="112176" oval="the">the</span> 
 <span m="112460" oval="news">news</span> 
 <span m="112745" oval="responsibly.">responsibly.</span> 
+</p>
+<p>
 <span m="114244" oval="We">We</span> 
 <span m="114679" oval="the">the</span> 
 <span m="115114" oval="American">American</span> 
@@ -767,6 +785,8 @@
 <span m="247748" oval="the">the</span> 
 <span m="248080" oval="news">news</span> 
 <span m="248412" oval="media.">media.</span> 
+</p>
+<p>
 <span m="249005" oval="The">The</span> 
 <span m="249423" oval="difference">difference</span> 
 <span m="249841" oval="between">between</span> 
@@ -1321,6 +1341,7 @@
 <span m="433518" oval="like">like</span> 
 <span m="433956" oval="the">the</span> 
 <span m="434393" oval="other.">other.</span> 
+</p>
     </div>
   </body>
 </html> 
